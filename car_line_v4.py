@@ -5,8 +5,6 @@ import time
 import logging
 import numpy as np
 
-"""THIS WAS THE BEST SO FAR, ACTUALLY USABLE! """
-
 # Configure Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -23,11 +21,13 @@ except Exception as e:
     logging.error(f"Error initializing EasyOCR reader: {e}")
     exit()  # Exit if EasyOCR initialization fails
 
+# Camera size is 640x480
+
 # New CONFIG Settings for Digits - Tune based on your image
-ROI_X_START = 0  # Approximate x-coordinate of the top-left corner of digits
-ROI_Y_START = 0  # Approximate y-coordinate of the top-left corner of digits
+ROI_X_START = 20  # Approximate x-coordinate of the top-left corner of digits
+ROI_Y_START = 20  # Approximate y-coordinate of the top-left corner of digits
 ROI_WIDTH = 600  # Approximate width of the digit region
-ROI_HEIGHT = 800  # Approximate height of the digit region
+ROI_HEIGHT = 440  # Approximate height of the digit region
 
 
 def detect_motion(frame1, frame2):
@@ -50,33 +50,40 @@ def detect_motion(frame1, frame2):
         logging.error(f"Error during motion detection: {e}")
         return False
 
-
 def recognize_digits_with_easyocr(frame):
     """Recognizes digits in a frame using EasyOCR."""
     try:
         # Predefined ROI Based on Original Image
         roi = frame[ROI_Y_START:ROI_Y_START + ROI_HEIGHT, ROI_X_START:ROI_X_START + ROI_WIDTH]
 
+        # **Before GRAY**
+        # 1. Noise Reduction
+
+        dst = cv2.fastNlMeansDenoisingColored(roi, None, 10, 10, 7, 21)
+
+        cv2.imshow("dst", dst)
+        cv2.waitKey(1)
+
         # Convert ROI to grayscale (EasyOCR works best with grayscale)
-        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(dst, cv2.COLOR_BGR2GRAY) #CONVERTED IT FROM DST
+
+        #CLAHE Output
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        clahe_output = clahe.apply(gray)  # Apply to the grayscale ROI
+
+        cv2.imshow("CLAHE Output", clahe_output)  # Debug
+        cv2.waitKey(1)
+        gray = clahe_output #Override for future use
 
         # Apply Adaptive Thresholding to preprocess the images
         thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
 
-        # ** TARGETED PREPROCESSING FOR THIN LINES **
-        # 1. Dilation
-        kernel = np.ones((2, 2), np.uint8)  # Adjust kernel size
-        dilated = cv2.dilate(thresh, kernel, iterations=1)  # Adjust iterations
-        cv2.imshow("Dilated", dilated)  # Show dilated image for debugging
+        # ** NOISE REDUCTION TECHNIQUES **
+        # 1. Median Blurring
+        median = cv2.medianBlur(thresh, 3)  # Adjust kernel size (should be odd)
+        cv2.imshow("Median Blur", median)
         cv2.waitKey(1)
-        thresh = dilated
-
-        # 2. Closing (Optional)
-        #kernel = np.ones((3, 3), np.uint8)  # Adjust kernel size
-        #closing = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
-        #cv2.imshow("Closing", closing)  # Show closing image for debugging
-        #cv2.waitKey(1)
-        #thresh = closing
+        thresh = median
 
         #Show it
         cv2.imshow("EasyOCR Input", thresh)  # Show the preprocessed ROI
@@ -102,7 +109,6 @@ def recognize_digits_with_easyocr(frame):
         logging.error(f"Error during digit recognition with EasyOCR: {e}")
         return []
 
-
 def main():
     """Main function to capture video and use EasyOCR for digit recognition."""
     try:
@@ -117,12 +123,11 @@ def main():
         if not ret:
             logging.error("Error: Could not read initial frame")
             return
-        # Get camera resolution
 
-        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        print(f"Camera resolution: {width}x{height}")
-        logging.info(f"Camera resolution: {width}x{height}")
+        # Get camera image size and print it
+
+        height, width, channels = frame1.shape #Added line. Note BGR
+        print(f"Initial Camera Image Size: Width = {width}, Height = {height}") #added line
 
         frame_count = 0
         while True:
@@ -141,10 +146,6 @@ def main():
                 if detect_motion(frame1, frame2):
                     print("Motion Detected!")
                     logging.info("Motion detected!")
-                     # Draw the ROI on the frame2 before calling recognize_digits
-                    cv2.rectangle(frame2, (ROI_X_START, ROI_Y_START), (ROI_X_START + ROI_WIDTH, ROI_Y_START + ROI_HEIGHT), (0, 255, 0), 2)
-                    cv2.imshow("Frame with ROI", frame2) # ADDED THIS LINE
-                    cv2.waitKey(1)
 
 
                     # Recognize digits in captured frame
