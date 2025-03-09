@@ -16,17 +16,17 @@ API_ENDPOINT = "https://localhost:8080"
 
 MIN_CONFIDENCE = 0.8
 NUMBER_LENGTH = 3
-TESSERACT_CONFIG = ('-l eng --oem 1 --psm 7 -c tessedit_char_whitelist=0123456789') #Try the Psm 8 config
+TESSERACT_CONFIG = ('-l eng --oem 1 --psm 8 -c tessedit_char_whitelist=0123456789') #Try the Psm 8 config
 MOTION_THRESHOLD = 20
 
 
 #New CONFIG Settings for Digits
-MIN_DIGIT_WIDTH = 10 #MIN width for digits
-MIN_DIGIT_HEIGHT = 20 #Min height for digits
-MAX_DIGIT_WIDTH = 100 #Maximum width for digits
+MIN_DIGIT_WIDTH = 5 #MIN width for digits
+MIN_DIGIT_HEIGHT = 5 #Min height for digits
+MAX_DIGIT_WIDTH = 200 #Maximum width for digits
 MAX_DIGIT_HEIGHT = 200 #Maximum height for digits
 MIN_DIGIT_ASPECT = 0.2 #Minimum aspect ratio (width / height)
-MAX_DIGIT_ASPECT = .5#Maximum aspect ratio
+MAX_DIGIT_ASPECT = 1#Maximum aspect ratio
 
 def detect_motion(frame1, frame2):
     """Detects motion between two frames."""
@@ -86,8 +86,8 @@ def recognize_digits(frame):
                     # ** AGGRESSIVE PREPROCESSING **
                     # 1. Adaptive Thresholding
                     #Less Agressive Try
-                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 10) #Less agressive  the C Value is now 5 instead of 2
-                    #thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 5) #Less agressive  the C Value is now 5 instead of 2
+                    # thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 2)
 
                     #Before Finding Contours Apply Dilation
                     #Applying scaling instead of morph
@@ -176,7 +176,7 @@ def main():
             cv2.imshow("Motion Detection", frame2)
 
             # Break the loop if 'q' is pressed
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            if cv2.waitKey(3) & 0xFF == ord('q'):
                 break
 
     except Exception as e:
