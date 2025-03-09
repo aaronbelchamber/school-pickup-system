@@ -83,8 +83,8 @@ def recognize_digits(frame):
                     # ** AGGRESSIVE PREPROCESSING **
                     # 1. Adaptive Thresholding
 
-                    thresh1 = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 2) #Try this if gaussian fails
-                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2) #Currently using this
+                    thresh1 = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, c=10) #Try this if gaussian fails
+                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, c=10) #Currently using this
                     window_name_mean = "Adaptive Mean"
                     window_name_gaussian = "Adaptive Gaussian"
 
