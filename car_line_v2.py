@@ -13,12 +13,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Configuration (Adjust these!)
 pytesseract.pytesseract.tesseract_cmd= r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 API_ENDPOINT = "https://localhost:8080"
-TESSERACT_CONFIG = ('-l eng --oem 1 --psm 7 -c tessedit_char_whitelist=0123456789')
 
-MIN_CONFIDENCE = 0.7
+MIN_CONFIDENCE = 0.8
 NUMBER_LENGTH = 3
-TESSERACT_CONFIG = ('-l eng --oem 1 --psm 7 -c tessedit_char_whitelist=0123456789') #Essential whitelist
+TESSERACT_CONFIG = ('-l eng --oem 1 --psm 7 -c tessedit_char_whitelist=0123456789') #Try the Psm 8 config
 MOTION_THRESHOLD = 20
+
 
 #New CONFIG Settings for Digits
 MIN_DIGIT_WIDTH = 10 #MIN width for digits
@@ -26,7 +26,7 @@ MIN_DIGIT_HEIGHT = 20 #Min height for digits
 MAX_DIGIT_WIDTH = 100 #Maximum width for digits
 MAX_DIGIT_HEIGHT = 200 #Maximum height for digits
 MIN_DIGIT_ASPECT = 0.2 #Minimum aspect ratio (width / height)
-MAX_DIGIT_ASPECT = 1.0 #Maximum aspect ratio
+MAX_DIGIT_ASPECT = .5#Maximum aspect ratio
 
 def detect_motion(frame1, frame2):
     """Detects motion between two frames."""
@@ -36,11 +36,7 @@ def detect_motion(frame1, frame2):
         gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(gray, (5, 5), 0)
         _, thresh = cv2.threshold(blur, MOTION_THRESHOLD, 255, cv2.THRESH_BINARY)
-
-        kernel = np.ones((5, 5), np.uint8)  # Adjust kernel size
-        dilated = cv2.dilate(thresh, kernel, iterations=1)  # Adjust iterations
-
-        #dilated = cv2.dilate(thresh, None, iterations=3)
+        dilated = cv2.dilate(thresh, None, iterations=3)
         contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         # If enough motion is detected, return True
@@ -51,6 +47,7 @@ def detect_motion(frame1, frame2):
     except Exception as e:
         logging.error(f"Error during motion detection: {e}")
         return False
+
 
 def recognize_digits(frame):
     """Recognizes digits in a frame."""
@@ -65,9 +62,15 @@ def recognize_digits(frame):
         contours = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         contours = imutils.grab_contours(contours)
 
-        #Store the window names we want to destroy later
-        window_names = []
+        #Apply dilation Before contour Detection
+        kernel = np.ones((5, 5), np.uint8)  # Adjust kernel size
+        dilated = cv2.dilate(edged, kernel, iterations=1)  # Adjust iterations
 
+        # Find contours on the dilated image
+        contours = cv2.findContours(dilated.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours = imutils.grab_contours(contours)
+
+        window_names = []
 
         for c in contours:
             # Extract bounding box and ROI
@@ -82,49 +85,40 @@ def recognize_digits(frame):
 
                     # ** AGGRESSIVE PREPROCESSING **
                     # 1. Adaptive Thresholding
+                    #Less Agressive Try
+                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 10) #Less agressive  the C Value is now 5 instead of 2
+                    #thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 2)
 
-                    thresh1 = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, C=10) #Try this if gaussian fails
-                    thresh = cv2.adaptiveThreshold(roi, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, C=10) #Currently using this
-                    window_name_mean = "Adaptive Mean"
-                    window_name_gaussian = "Adaptive Gaussian"
+                    #Before Finding Contours Apply Dilation
+                    #Applying scaling instead of morph
+                    scale_percent = 150 # percent of original size
+                    width = int(roi.shape[1] * scale_percent / 100)
+                    height = int(roi.shape[0] * scale_percent / 100)
+                    dim = (width, height)
 
-                    cv2.imshow(window_name_mean, thresh1)
-                    cv2.imshow(window_name_gaussian, thresh)
+                    # resize image
+                    resized = cv2.resize(roi, dim, interpolation = cv2.INTER_AREA)
+                    cv2.imshow("ROI RESIZE", resized)
                     cv2.waitKey(1)
-
-                    #window_names.append(window_name_mean)
-                    #window_names.append(window_name_gaussian)
-
-                    #thresh = thresh #Pick best above
-
-                    #2 MORPH
-                    kernel = np.ones((2, 2), np.uint8)  # Adjust kernel size
-                    opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)  # Erosion followed by dilation
-                    closing = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)  # Dilation followed by erosion
-                    window_name_opening = "Opening"
-                    window_name_closing = "Closing"
-
-                    #cv2.imshow(window_name_opening, opening)
-                    #cv2.imshow(window_name_closing, closing)
-                    #cv2.waitKey(1)
-
-                    #window_names.append(window_name_opening)
-                    #window_names.append(window_name_closing)
-
-                    #pick thresh
-                    thresh = opening #Pick best above
 
                     #Show it. MOST IMPORTANT DEBUGGING STEP
                     window_name_ocr = "OCR Input"
-                    #cv2.imshow(window_name_ocr, thresh)  # Show the preprocessed ROI
-                    #cv2.waitKey(1)  # Add a small delay to allow the window to update
-                    #window_names.append(window_name_ocr)
+                    cv2.imshow(window_name_ocr, thresh)  # Show the preprocessed ROI
+                    cv2.waitKey(3)  # Add a small delay to allow the window to update
+                    window_names.append(window_name_ocr)
+
 
                     # Recognize text using Tesseract OCR
                     try:
-                        text = pytesseract.image_to_string(thresh, config=TESSERACT_CONFIG)
-                        text = ''.join(filter(str.isdigit, text)).strip()
-                        logging.info(f"Raw OCR Text: '{text}'")
+
+                        #Invert Threshold test.
+                        inverted_thresh = cv2.bitwise_not(thresh) #Try this
+
+                        #Added inverted or not
+                        text = pytesseract.image_to_string(inverted_thresh, config=TESSERACT_CONFIG) #To OCR process using correct whitelist
+                        #Now it has the OCR process on the correct grayscale image for OCR
+                        text = ''.join(filter(str.isdigit, text)).strip() #We will be extracting only digits
+                        logging.info(f"Raw OCR Text: '{text}'") #Extracted final numbers and showing
 
                         if len(text) == NUMBER_LENGTH and text.isdigit():
                             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -144,11 +138,8 @@ def recognize_digits(frame):
                                 logging.error(f"API Request Exception: {e}")
                     except Exception as e:
                         logging.error(f"OCR Error: {e}")
-                #for window in window_names: #loop to remove windows created
-
-                #    cv2.destroyWindow(window) #No need to delete the individual windows here
-
         return frame
+
     except Exception as e:
         logging.error(f"Error during digit recognition: {e}")
         return frame
@@ -194,7 +185,7 @@ def main():
     finally:
         # Release the camera and destroy all windows
         cap.release()
-        cv2.destroyAllWindows() #Move here
+        cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
