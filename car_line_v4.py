@@ -50,6 +50,7 @@ def detect_motion(frame1, frame2):
         logging.error(f"Error during motion detection: {e}")
         return False
 
+
 def recognize_digits_with_easyocr(frame):
     """Recognizes digits in a frame using EasyOCR."""
     try:
@@ -62,11 +63,21 @@ def recognize_digits_with_easyocr(frame):
         # Apply Adaptive Thresholding to preprocess the images
         thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
 
-        #Morph Functions
-        kernel = np.ones((3, 3), np.uint8)
-        opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=1)  # Remove small noises
-        closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel, iterations=1)  # Close potential gaps
-        thresh = closing
+        # ** TARGETED PREPROCESSING FOR THIN LINES **
+        # 1. Dilation
+        kernel = np.ones((2, 2), np.uint8)  # Adjust kernel size
+        dilated = cv2.dilate(thresh, kernel, iterations=1)  # Adjust iterations
+        cv2.imshow("Dilated", dilated)  # Show dilated image for debugging
+        cv2.waitKey(1)
+        thresh = dilated
+
+        # 2. Closing (Optional)
+        #kernel = np.ones((3, 3), np.uint8)  # Adjust kernel size
+        #closing = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
+        #cv2.imshow("Closing", closing)  # Show closing image for debugging
+        #cv2.waitKey(1)
+        #thresh = closing
+
         #Show it
         cv2.imshow("EasyOCR Input", thresh)  # Show the preprocessed ROI
         cv2.waitKey(1)
@@ -90,6 +101,7 @@ def recognize_digits_with_easyocr(frame):
     except Exception as e:
         logging.error(f"Error during digit recognition with EasyOCR: {e}")
         return []
+
 
 def main():
     """Main function to capture video and use EasyOCR for digit recognition."""
