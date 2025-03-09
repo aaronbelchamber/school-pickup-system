@@ -56,58 +56,55 @@ def recognize_digits_with_easyocr(frame):
         # Predefined ROI Based on Original Image
         roi = frame[ROI_Y_START:ROI_Y_START + ROI_HEIGHT, ROI_X_START:ROI_X_START + ROI_WIDTH]
 
-        # **Before GRAY**
-        # 1. Noise Reduction
-
-        dst = cv2.fastNlMeansDenoisingColored(roi, None, 10, 10, 7, 21)
-
-        cv2.imshow("dst", dst)
-        cv2.waitKey(1)
-
         # Convert ROI to grayscale (EasyOCR works best with grayscale)
-        gray = cv2.cvtColor(dst, cv2.COLOR_BGR2GRAY) #CONVERTED IT FROM DST
+        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 
-        #CLAHE Output
+        #Now test to see if this portion is working by removing Adaptive
+
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-        clahe_output = clahe.apply(gray)  # Apply to the grayscale ROI
 
-        cv2.imshow("CLAHE Output", clahe_output)  # Debug
+        #Adaptive Threshold
+        #clahe_output = clahe.apply(median)
+        cv2.imshow("Gray Test 1:10", gray)
         cv2.waitKey(1)
-        gray = clahe_output #Override for future use
 
-        # Apply Adaptive Thresholding to preprocess the images
-        thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
-
-        # ** NOISE REDUCTION TECHNIQUES **
-        # 1. Median Blurring
-        median = cv2.medianBlur(thresh, 3)  # Adjust kernel size (should be odd)
-        cv2.imshow("Median Blur", median)
+        kernel = np.ones((2, 2), np.uint8)
+        dilated = cv2.dilate(gray, kernel)
+        cv2.imshow("DilationBeforeMedian", dilated)
         cv2.waitKey(1)
-        thresh = median
+        #.Add what it needs but remove the non value add.
 
-        #Show it
+        median = dilated
+        clahe_output = clahe.apply(median)
+        #-
+
+        clahe_output = gray
+        clahe = dilated #To pass this
+
+        cv2.imshow("clahe_output", clahe_output)
+        cv2.waitKey(1)
+        #Show it.
+        thresh = clahe_output
         cv2.imshow("EasyOCR Input", thresh)  # Show the preprocessed ROI
         cv2.waitKey(1)
-
-
-        # Perform OCR using EasyOCR
+        #Perform before image, because there is no roi image anymore
         results = reader.readtext(thresh)
 
         #Extract the text
-        recognized_digits = [] #Store digits
+        recognized_digits = []  # Store digits
         for (bbox, text, prob) in results:
-            text = ''.join(filter(str.isdigit, text)).strip() #Extrat Numbers
+            text = ''.join(filter(str.isdigit, text)).strip()  # Extrat Numbers
 
-            #Now Verify only numbers and correct digit amount
+            # Now Verify only numbers and correct digit amount
             if len(text) == 3 and text.isdigit():
-                recognized_digits.append(text) #Append Digits
-
+                recognized_digits.append(text)  # Append Digits
 
         return recognized_digits
 
     except Exception as e:
         logging.error(f"Error during digit recognition with EasyOCR: {e}")
         return []
+    
 
 def main():
     """Main function to capture video and use EasyOCR for digit recognition."""

@@ -1,70 +1,29 @@
 [
-    501,
-    501,
     {
-        "timestamp": "2025-03-09T13:45:59.994059",
-        "request": {
-            "key": "value"
-        }
-    },
-    200,
-    501,
-    400,
-    400,
-    400,
-    {
-        "timestamp": "2025-03-09T16:52:55.362228",
+        "timestamp": "2025-03-09T17:23:13.162079",
         "request": {
             "student_number": "478"
         }
     },
     200,
     {
-        "timestamp": "2025-03-09T16:56:46.300223",
+        "timestamp": "2025-03-09T17:23:22.729365",
         "request": {
-            "student_number": "478"
+            "student_number": "597"
         }
     },
     200,
     {
-        "timestamp": "2025-03-09T16:58:01.538277",
+        "timestamp": "2025-03-09T17:23:32.396445",
         "request": {
             "student_number": "368"
         }
     },
     200,
     {
-        "timestamp": "2025-03-09T16:58:07.458131",
+        "timestamp": "2025-03-09T17:24:12.198024",
         "request": {
-            "student_number": "368"
-        }
-    },
-    200,
-    {
-        "timestamp": "2025-03-09T17:03:27.193852",
-        "request": {
-            "student_number": "478"
-        }
-    },
-    200,
-    {
-        "timestamp": "2025-03-09T17:03:36.787423",
-        "request": {
-            "student_number": "641"
-        }
-    },
-    200,
-    {
-        "timestamp": "2025-03-09T17:04:24.009586",
-        "request": {
-            "student_number": "478"
-        }
-    },
-    200,
-    {
-        "timestamp": "2025-03-09T17:07:55.392239",
-        "request": {
-            "student_number": "478"
+            "student_number": "142"
         }
     },
     200

@@ -1,0 +1,92 @@
+[
+    501,
+    501,
+    {
+        "timestamp": "2025-03-09T13:45:59.994059",
+        "request": {
+            "key": "value"
+        }
+    },
+    200,
+    501,
+    400,
+    400,
+    400,
+    {
+        "timestamp": "2025-03-09T16:52:55.362228",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T16:56:46.300223",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T16:58:01.538277",
+        "request": {
+            "student_number": "368"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T16:58:07.458131",
+        "request": {
+            "student_number": "368"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:03:27.193852",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:03:36.787423",
+        "request": {
+            "student_number": "641"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:04:24.009586",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:07:55.392239",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:14:26.024914",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:14:58.285824",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:15:23.204418",
+        "request": {
+            "student_number": "990"
+        }
+    },
+    200
+]
