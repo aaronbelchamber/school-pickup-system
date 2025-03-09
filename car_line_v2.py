@@ -17,7 +17,6 @@ TESSERACT_CONFIG = ('-l eng --oem 1 --psm 7 -c tessedit_char_whitelist=012345678
 
 MIN_CONFIDENCE = 0.7
 NUMBER_LENGTH = 3
-TESSERACT_CONFIG = ('-l eng --oem 1 --psm 8 -c tessedit_char_whitelist=0123456789')  # Try the Psm 8 config
 MOTION_THRESHOLD = 20
 FRAME_INTERVAL = 5  # Process every 5th frame
 
