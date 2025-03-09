@@ -50,6 +50,7 @@ def detect_motion(frame1, frame2):
         logging.error(f"Error during motion detection: {e}")
         return False
 
+
 def recognize_digits_with_easyocr(frame):
     """Recognizes digits in a frame using EasyOCR."""
     try:
@@ -60,18 +61,17 @@ def recognize_digits_with_easyocr(frame):
         gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 
         #Now test to see if this portion is working by removing Adaptive
-
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 
         #Adaptive Threshold
         #clahe_output = clahe.apply(median)
-        cv2.imshow("Gray Test 1:10", gray)
-        cv2.waitKey(1)
+        # cv2.imshow("Gray Test 1:10", gray)
+        # cv2.waitKey(1)
 
         kernel = np.ones((2, 2), np.uint8)
         dilated = cv2.dilate(gray, kernel)
-        cv2.imshow("DilationBeforeMedian", dilated)
-        cv2.waitKey(1)
+        #cv2.imshow("DilationBeforeMedian", dilated)
+        #cv2.waitKey(1)
         #.Add what it needs but remove the non value add.
 
         median = dilated
@@ -81,12 +81,13 @@ def recognize_digits_with_easyocr(frame):
         clahe_output = gray
         clahe = dilated #To pass this
 
-        cv2.imshow("clahe_output", clahe_output)
-        cv2.waitKey(1)
+        #cv2.imshow("clahe_output", clahe_output)
+        #cv2.waitKey(1)
+
         #Show it.
         thresh = clahe_output
         cv2.imshow("EasyOCR Input", thresh)  # Show the preprocessed ROI
-        cv2.waitKey(1)
+        #cv2.waitKey(1)
         #Perform before image, because there is no roi image anymore
         results = reader.readtext(thresh)
 
@@ -109,6 +110,10 @@ def recognize_digits_with_easyocr(frame):
 def main():
     """Main function to capture video and use EasyOCR for digit recognition."""
     try:
+        
+        # cv2.namedWindow("AdaptiveThresh", cv2.WINDOW_NORMAL)
+        # cv2.moveWindow("Easy OCR Input", 500, 500)
+
         cap = cv2.VideoCapture(0)
 
         if not cap.isOpened():
