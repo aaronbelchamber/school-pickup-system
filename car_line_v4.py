@@ -141,7 +141,7 @@ def main():
 
             cv2.imshow("Original Frame", frame2) #Show orig frame
             # Small delay here to reduce the frame rate the camera looks for motion
-            time.sleep(0.1)  # Short break before the next frame
+            time.sleep(1)  # Short break before the next frame
 
             # Detect motion
             if frame_count % FRAME_INTERVAL == 0:
@@ -169,7 +169,7 @@ def main():
 
 
                     # Wait 2 seconds before scanning again
-                    time.sleep(2)
+                    #time.sleep(1)
 
                 # Update frame1 for the next iteration
                 frame1 = frame2.copy()

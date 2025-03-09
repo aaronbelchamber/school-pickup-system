@@ -54,5 +54,28 @@
             "student_number": "142"
         }
     },
-    200
+    200,
+    {
+        "timestamp": "2025-03-09T17:49:16.338638",
+        "request": {
+            "student_number": "478"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:49:55.928210",
+        "request": {
+            "student_number": "368"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-03-09T17:50:16.856656",
+        "request": {
+            "student_number": "597"
+        }
+    },
+    200,
+    501,
+    501
 ]
