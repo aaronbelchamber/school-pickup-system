@@ -1,0 +1,23 @@
+[
+    {
+        "timestamp": "2025-08-17T13:19:53.788063",
+        "request": {
+            "student_number": "461"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-08-17T13:20:08.326318",
+        "request": {
+            "student_number": "233"
+        }
+    },
+    200,
+    {
+        "timestamp": "2025-08-17T13:20:28.848483",
+        "request": {
+            "student_number": "81"
+        }
+    },
+    200
+]

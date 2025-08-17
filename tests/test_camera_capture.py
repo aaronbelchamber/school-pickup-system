@@ -1,5 +1,8 @@
 import cv2
 
+'''
+This is just to test that your devices camera works.
+'''
 try:
     cap = cv2.VideoCapture(0)
 
@@ -27,7 +30,7 @@ except Exception as e:
 
 exit()
 
-img = cv2.imread("./test/test-number-card.jpg")  # Replace with the path to an actual image
+img = cv2.imread("./tests/test-number-card.jpg")  # Replace with the path to an actual image
 cv2.imshow("Test Image", img)
 cv2.waitKey(0)  # Wait until a key is pressed
 cv2.destroyAllWindows()

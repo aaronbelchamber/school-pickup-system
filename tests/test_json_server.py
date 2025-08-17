@@ -25,7 +25,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps({"status": "received"}).encode('utf-8'))
 
     def log_request(self, log_entry):
-        log_file = "request_log.json"
+        log_file = f"{os.path.dirname(__file__)}/../data/request_log.json"
         log_data = []
 
         if os.path.exists(log_file):
