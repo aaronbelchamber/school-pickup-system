@@ -26,8 +26,8 @@ except Exception as e:
 # New CONFIG Settings for Digits - Tune based on your image
 ROI_X_START = 0  # Approximate x-coordinate of the top-left corner of digits
 ROI_Y_START = 0  # Approximate y-coordinate of the top-left corner of digits
-ROI_WIDTH = 600  # Approximate width of the digit region
-ROI_HEIGHT = 800  # Approximate height of the digit region
+ROI_WIDTH = 640  # Approximate width of the digit region
+ROI_HEIGHT = 480  # Approximate height of the digit region
 
 
 def detect_motion(frame1, frame2):
