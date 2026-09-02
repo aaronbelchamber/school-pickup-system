@@ -1,4 +1,4 @@
-# School Pickup System - Car Line Automation
+# School Pickup System
 Here’s a practical application that can help schools with parent pickup and reduce unpleasant tasks and time burdening school staff.  It really doesn't involve AI in its operational state, but to speed up the development of this prototype I did use some AI to create a free solution.
 
 ## This is not a fully built out system but a Proof of Concept!
