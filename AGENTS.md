@@ -25,7 +25,7 @@
 
 # AGENTS.md — School Pickup System
 
-Read [MISSION.md](MISSION.md) first. The one thing to take from it before
+Read [MISSION.md](docs/MISSION.md) first. The one thing to take from it before
 touching anything: **this is a concept, not a proof of concept.** Aaron's
 words, 2026-09-04. There is no running system here, and writing about it as
 though there were is the specific way this repo can go wrong.
