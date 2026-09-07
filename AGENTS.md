@@ -1,19 +1,23 @@
 > **Standing preferences for this drive live outside this repo.** They are
-> **four** files in `E:\project-hub\`, and all four apply. Read them before
+> the files in `E:\project-hub\`, and all of them apply. Read them before
 > working here. They are canonical: where any of them and anything below
 > disagree, they win and the text below is the thing to fix.
 >
 > | File | Covers |
 > |---|---|
 > | `PREFERENCES.md` | *what* to build for and against -- the port bands, launching processes without a window, URL hygiene, hosting and cloud access, destructive automation |
-> | `PRACTICES.md` | *how* to build it -- applicable skills, script placement, file size, verification, planning before editing, design systems, self-review, CI, issue tracking |
+> | `PRACTICES.md` | *how* to build it -- applicable skills, script placement, file size, planning before editing, who owns what across projects, design systems, database schema design, issue tracking |
+> | `VERIFICATION.md` | proving the work is right -- the cheapest sufficient check, exercising a claim rather than reading one, breaking what a test guards to prove it fails, reporting *did not run* as its own outcome, stop conditions, self-review, when CI earns its cost |
 > | `COLLABORATION.md` | how to do either while someone else is in the same tree -- version control and branch conventions, worktrees rather than `main`, and the changes only Aaron can make |
 > | `DOCUMENTATION.md` | keeping the written record true -- writing a doc in the tense of what exists, the doc health check, session retros and where a learning gets routed |
 >
-> `PREFERENCES.md` is the entry point and links the other three, but do not
-> rely on reaching them by link -- read all four. That set grows: it was one
-> file until it passed its own size rule, three times. Before assuming it is
-> still four, list `E:\project-hub\*.md`.
+> `PREFERENCES.md` is the entry point and links the others, but do not rely on
+> reaching them by link. **List `E:\project-hub\*.md` and read what is there**,
+> rather than trusting the table above to still be the whole set: it was one file
+> until it passed its own size rule, four times over, most recently on
+> 6 September 2026. A count written into this block is a census of a directory
+> that grows, which is the failure `COLLABORATION.md` records about censuses
+> generally -- it goes stale with nothing reporting that it has.
 >
 > If that path does not resolve -- a different machine, an unmounted drive --
 > recover them rather than carrying on as though there were no standing
