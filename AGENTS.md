@@ -1,5 +1,5 @@
 > **Standing preferences for this drive live outside this repo.** They are
-> the files in `E:\project-hub\`, and all of them apply. Read them before
+> the files in `E:\project-hub\docs\standards\`, and all of them apply. Read them before
 > working here. They are canonical: where any of them and anything below
 > disagree, they win and the text below is the thing to fix.
 >
@@ -12,7 +12,7 @@
 > | `DOCUMENTATION.md` | keeping the written record true -- writing a doc in the tense of what exists, the doc health check, session retros and where a learning gets routed |
 >
 > `PREFERENCES.md` is the entry point and links the others, but do not rely on
-> reaching them by link. **List `E:\project-hub\*.md` and read what is there**,
+> reaching them by link. **List `E:\project-hub\docs\standards\*.md` and read what is there**,
 > rather than trusting the table above to still be the whole set: it was one file
 > until it passed its own size rule, four times over, most recently on
 > 6 September 2026. A count written into this block is a census of a directory
