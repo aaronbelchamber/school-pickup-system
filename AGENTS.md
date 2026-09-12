@@ -10,12 +10,15 @@
 > | `VERIFICATION.md` | proving the work is right -- the cheapest sufficient check, exercising a claim rather than reading one, breaking what a test guards to prove it fails, reporting *did not run* as its own outcome, stop conditions, self-review, when CI earns its cost |
 > | `COLLABORATION.md` | how to do either while someone else is in the same tree -- version control and branch conventions, worktrees rather than `main`, and the changes only Aaron can make |
 > | `DOCUMENTATION.md` | keeping the written record true -- writing a doc in the tense of what exists, the doc health check, session retros and where a learning gets routed |
+> | `ARCHITECTURE.md` | keeping one system coherent as it grows -- one fact with one owner, a declared read surface, a class that outgrew its own description, a protocol repeated instead of expressed |
+> | `DESIGN_SYSTEM.md` | the dashboard's own tokens, plus two rules marked to apply everywhere -- above-the-fold density and `mm/dd/YYYY` date formatting |
+> | `SITES.md` | Aaron's public web properties -- voice and imagery, the register for his own writing, screenshots of the internal tools when published, image format floors, one-writable-copy content, web hosting and site access |
 >
 > `PREFERENCES.md` is the entry point and links the others, but do not rely on
 > reaching them by link. **List `E:\project-hub\docs\standards\*.md` and read what is there**,
 > rather than trusting the table above to still be the whole set: it was one file
-> until it passed its own size rule, four times over, most recently on
-> 6 September 2026. A count written into this block is a census of a directory
+> until it passed its own size rule, five times over, most recently on
+> 11 September 2026 when `SITES.md` came out. A count written into this block is a census of a directory
 > that grows, which is the failure `COLLABORATION.md` records about censuses
 > generally -- it goes stale with nothing reporting that it has.
 >
