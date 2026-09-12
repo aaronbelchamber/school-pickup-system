@@ -13,12 +13,15 @@
 > | `ARCHITECTURE.md` | keeping one system coherent as it grows -- one fact with one owner, a declared read surface, a class that outgrew its own description, a protocol repeated instead of expressed |
 > | `DESIGN_SYSTEM.md` | the dashboard's own tokens, plus two rules marked to apply everywhere -- above-the-fold density and `mm/dd/YYYY` date formatting |
 > | `SITES.md` | Aaron's public web properties -- voice and imagery, the register for his own writing, screenshots of the internal tools when published, image format floors, one-writable-copy content, web hosting and site access |
+> | `DATABASE.md` | whether, and how, something lives in a database -- whether it belongs in one at all, schema design, reading and writing through a shared data layer, coordinating concurrent schema changes |
+> | `BRANCH_GUARD.md` | the hook that enforces the never-write-on-`main` rule -- what it denies, the `--allow` and `--realign-pass` override windows, the shell-command matcher |
+> | `WINDOWS.md` | commands and filesystem operations that behave differently on Windows than the tool producing them assumes -- which tool actually creates a working symlink or junction, which command dialect for Aaron |
 >
 > `PREFERENCES.md` is the entry point and links the others, but do not rely on
 > reaching them by link. **List `E:\project-hub\docs\standards\*.md` and read what is there**,
 > rather than trusting the table above to still be the whole set: it was one file
-> until it passed its own size rule, five times over, most recently on
-> 11 September 2026 when `SITES.md` came out. A count written into this block is a census of a directory
+> until it passed its own size rule, eight times over, most recently on
+> 12 September 2026 when `BRANCH_GUARD.md` and `WINDOWS.md` came out. A count written into this block is a census of a directory
 > that grows, which is the failure `COLLABORATION.md` records about censuses
 > generally -- it goes stale with nothing reporting that it has.
 >
