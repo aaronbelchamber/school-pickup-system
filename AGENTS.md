@@ -1,14 +1,8 @@
-> **Standing preferences for this drive live outside this repo**, in
-> `E:\project-hub\docs\standards\`. **List `*.md` there and read what is
-> present** rather than working from a list here -- the set grows each time one
-> of them outgrows its own size rule, so a list or a count written into this
-> block would be a census of a moving directory. All of them apply and all are
-> canonical: where any of them and anything below disagree, they win and the
-> text below is the thing to fix. `PREFERENCES.md` is the entry point.
->
-> If that path does not resolve -- a different machine, an unmounted drive --
-> recover them rather than carrying on as though there were no standing
-> preferences: `gh repo clone aaronbelchamber/project-hub`.
+> **Standing preferences apply to this repo.** The operator keeps them in
+> cross-project files outside this repository, canonical wherever they and
+> anything below disagree. They are not published, and an outside contributor
+> does not need them: everything required to build, test and run this project is
+> here.
 
 # AGENTS.md — School Pickup System
 
