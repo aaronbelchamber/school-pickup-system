@@ -39,7 +39,5 @@ pulls a large model on first run. A camera is required for the capture path.
 ## Ports
 
 None. Nothing here binds a port, and nothing here is declared in a launch
-manifest -- so it does not appear on Central Project Hub's band map and does
-not need a slot. If a spike ever needs a local server, take an even slot from
-the `62000-62099` band and check `E:\.portfolio\band-claims.json` first;
-`PREFERENCES.md` has the rules.
+manifest, so it needs no slot. If a spike ever needs a local server, claim one
+the way the standing `ESTATE_LAYOUT.md`, "Ports", says.
