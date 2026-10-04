@@ -1,10 +1,8 @@
 # Mission
 
-**This is a concept, not a proof of concept.** Stated by Aaron 2026-09-04:
-*"not even PoC level, it's a concept I'll want to flesh out."* The README
-called it a proof of concept and that overstated what is here; corrected in
-the same pass. What exists is the idea, written down at length, with four
-camera/OCR spikes attached to show the reading step is tractable.
+**This is a concept, not a proof of concept** (Aaron, 2026-09-04). What
+exists is the idea, written down at length, with four camera/OCR spikes
+attached to show the reading step is tractable.
 
 ## What this is for
 

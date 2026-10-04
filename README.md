@@ -6,8 +6,7 @@ Here’s a practical application that can help schools with parent pickup and re
 What is in this repo is the idea below, plus four successive spikes at the
 camera-to-number step (`src/car_line_v4.py` and three earlier attempts under
 `src/car_line_alternatives/`). Nothing is wired together, there is no entry
-point, and none of it has run at a school. This heading said "Proof of
-Concept" until 2026-09-04; that overstated it. See
+point, and none of it has run at a school. See
 [MISSION.md](docs/MISSION.md).
 This would reduce school operational costs and the toil of needing teachers to enter every parent car’s student pick up number manually.  It will also eliminate human errors where people have to stand for almost an hour in all sorts of elements, sometimes in heavy rain or uncomfortable heat to do something we already know we have the technology to automate.
 
