@@ -31,7 +31,8 @@ Aaron's children's school is the case it was written from.
   lines each. They are versions of one spike, not components of one program:
   nothing imports another and there is no entry point.
 - `tests/test_camera_capture.py` and `tests/test_json_server.py` -- two small
-  scripts that exercise a camera and a JSON endpoint by hand.
+  scripts that exercise a camera and a JSON endpoint by hand. The JSON server
+  listens on `localhost:8080`, which is where `car_line_v4.py` posts.
 - `data/request_log*.json` -- captured request shapes.
 - `requirements.txt` -- `opencv-python`, `pytesseract`, `easyocr`, `imutils`,
   `requests`. The README records that `easyocr` gave the best results of the
@@ -39,8 +40,9 @@ Aaron's children's school is the case it was written from.
 
 ## What it is not
 
-- **Not a running system.** There is no service, no scheduler, no deployment
-  and no entry point. Nothing here has been used at a school.
+- **Not a running system.** There is no deployed service, no scheduler and no
+  entry point; the only server is the hand-run test receiver on port 8080.
+  Nothing here has been used at a school.
 - **Not integrated with anything.** Whether the software the office currently
   uses exposes an API is an open question the README raises and nobody has
   answered. The fallback idea -- emitting the digits as synthetic keystrokes

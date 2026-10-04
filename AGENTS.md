@@ -27,10 +27,19 @@ though there were is the specific way this repo can go wrong.
 
 ## Running a spike
 
-```bash
-python -m venv venv && venv/Scripts/activate     # Windows
+From the repository root, in a Windows command prompt:
+
+```cmd
+python -m venv venv
+venv\Scripts\activate.bat
 pip install -r requirements.txt
-python src/car_line_v4.py                        # the most recent attempt
+python tests\test_json_server.py
+```
+
+then, in a second prompt with the venv active, the most recent attempt:
+
+```cmd
+python src\car_line_v4.py
 ```
 
 `easyocr` is the library the README settles on after trying the others; it
@@ -38,6 +47,8 @@ pulls a large model on first run. A camera is required for the capture path.
 
 ## Ports
 
-None. Nothing here binds a port, and nothing here is declared in a launch
-manifest, so it needs no slot. If a spike ever needs a local server, claim one
-the way the standing `ESTATE_LAYOUT.md`, "Ports", says.
+One, by hand: `tests/test_json_server.py` binds `8080` and
+`src/car_line_v4.py` posts to `http://localhost:8080`. That port is outside the
+estate's port bands and is in no launch manifest. Moving it is a code change to
+both files; claim the new port the way the standing `ESTATE_LAYOUT.md`,
+"Ports", says.
