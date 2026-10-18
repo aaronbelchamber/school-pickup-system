@@ -54,6 +54,7 @@ Aaron's children's school is the case it was written from.
 ## Interfaces
 
 ```yaml
+project_kind: lab
 provides: []
 consumes: []
 ```
