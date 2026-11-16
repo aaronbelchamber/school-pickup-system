@@ -67,6 +67,8 @@ existing pickup software, which is external and unidentified.
 ## Related projects
 
 None. It shares no code, contract or dependency with anything else in this
-portfolio, and it is not part of the internal-tooling design-system estate --
-`PRACTICES.md` scopes that to the tools that run the drive, and this is not
-one of them.
+portfolio.
+
+**Design system:** none, and no `docs/DESIGN_SYSTEM.md`. The spikes' only screens are OpenCV
+debug windows, not an interface. project-hub's `docs/standards/DESIGN_SYSTEM.md` has a
+project start its own `docs/DESIGN_SYSTEM.md` with its first substantial UI work.
