@@ -31,19 +31,21 @@ reference it against the students linked to it from a simple database table, and
 
 ## Steps to run
 
-1) So you have to activate the virtual environmen (venv). For Windows computers, go to the root of this code and enter:  > `venv/Scripts/activate.bat`
+1) The first time only, create a virtual environment (venv). For Windows computers, go to the root of this code and enter:  > `python -m venv venv`
 
-2) If this is the first time running this, packages need to be installed so once you're in the venv, run:
+2) Activate the virtual environment. From the root of this code, enter:  > `venv\Scripts\activate.bat`
+
+3) If this is the first time running this, packages need to be installed so once you're in the venv, run:
 > `python -m pip install -r requirements.txt`
 
-3) Once everything is installed, now let's run the JSON server.  This is to a server that receives the numbers that will get transmitted
+4) Once everything is installed, now let's run the JSON server.  This is to a server that receives the numbers that will get transmitted
 from this application and save the data with a timestamp.  This is to show that the tests work, but can easily be built out to send the data
 to another system if it has an API to receive these requests.
 
 To run the JSON server, just enter this from the project root:  > `python tests\test_json_server.py`
 Keep this terminal window open!  This is where you will see your tests results.
 
-4) Now let's run the app that will open the camera and when it sees digits put in front of it it will read the digits and send them to the JSON server.
+5) Now let's run the app that will open the camera and when it sees digits put in front of it it will read the digits and send them to the JSON server.
 Open up another terminal in this root project then enter:  > `python src\car_line_v4.py`
 
 It might take a few seconds to start up before the camera turns on.  
