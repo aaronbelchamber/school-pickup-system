@@ -31,7 +31,9 @@ Aaron's children's school is the case it was written from.
 - `tests/test_camera_capture.py` and `tests/test_json_server.py` -- two small
   scripts that exercise a camera and a JSON endpoint by hand. The JSON server
   listens on `localhost:8080`, which is where `car_line_v4.py` posts.
-- `data/request_log*.json` -- captured request shapes.
+- `data/request_log*.json` -- captured request shapes. The student numbers in them
+  (461, 233 ...) are test numbers from August 2025 development runs, not real
+  students' (Aaron, 11/25/2026).
 - `requirements.txt` -- `opencv-python`, `pytesseract`, `easyocr`, `imutils`,
   `requests`. The README records that `easyocr` gave the best results of the
   OCR libraries tried.
